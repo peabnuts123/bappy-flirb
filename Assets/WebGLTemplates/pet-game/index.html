@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>{{{ PRODUCT_NAME }}}</title>
+</head>
+
+<body class="game-body">
+  <!-- Unity config as vanilla JS variables -->
+  <script src="js/unity-config.js"></script>
+
+  <!-- Game Canvas -->
+  <canvas id="unity-canvas" class="game-canvas"></canvas>
+
+  <!-- Loader script -->
+  <script src="Build/{{{ LOADER_FILENAME }}}"></script>
+
+  <!-- Run app -->
+  <script src="js/index.js"></script>
+  <script src="js/resize-viewport.js"></script>
+</body>
+
+</html>
+

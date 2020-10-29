@@ -1,0 +1,30 @@
+{
+  "headers": [
+    {
+      "source": "**/*.@(data|mem).br",
+      "headers": [
+        {
+          "key": "Content-Encoding",
+          "value": "br"
+        },
+        {
+          "key": "Content-Type",
+          "value": "binary/octet-stream"
+        }
+      ]
+    },
+    {
+      "source": "**/*.js.br",
+      "headers": [
+        {
+          "key": "Content-Encoding",
+          "value": "br"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
+    }
+  ]
+}

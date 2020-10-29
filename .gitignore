@@ -5,7 +5,6 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
@@ -77,3 +76,10 @@ crashlytics-build.properties
 *.tfvars
 !example.tfvars
 terraform/tmp/
+
+# npm
+node_modules/
+
+# build output
+/[Bb]uild/*
+!/[Bb]uild/serve.json

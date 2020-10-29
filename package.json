@@ -1,0 +1,22 @@
+{
+  "name": "bappy-flirb",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "debug-build": "serve build -l 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peabnuts123/bappy-flirb.git"
+  },
+  "author": "peabnuts123",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/peabnuts123/bappy-flirb/issues"
+  },
+  "homepage": "https://github.com/peabnuts123/bappy-flirb#readme",
+  "devDependencies": {
+    "serve": "^11.3.2"
+  }
+}

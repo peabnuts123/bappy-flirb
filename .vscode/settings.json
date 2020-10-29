@@ -4,8 +4,6 @@
     "**/.git": true,
     "**/.gitmodules": true,
     "**/*.meta": false,
-    "build/": true,
-    "Build/": true,
     "Library/": true,
     "library/": true,
     "obj/": true,
