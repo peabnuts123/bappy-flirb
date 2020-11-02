@@ -18,6 +18,12 @@
   <!-- Game Canvas -->
   <canvas id="unity-canvas" class="game-canvas"></canvas>
 
+   <!-- Version / meta information -->
+   <div class="info-overlay">
+    <p>Version: {{{PRODUCT_VERSION}}} ({{{DATA_FILENAME.match(/\w+/g)[0]}}})</p>
+    <p>by {{{COMPANY_NAME}}}</p>
+  </div>
+
   <!-- Loader script -->
   <script src="Build/{{{ LOADER_FILENAME }}}"></script>
 

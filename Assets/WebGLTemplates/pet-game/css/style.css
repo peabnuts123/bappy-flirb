@@ -1,3 +1,36 @@
+/* Apply a natural box layout model to all elements, but allowing components to override */
+/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+html {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+
+  /* Better Font Rendering */
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: no-common-ligatures;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img {
+  /* Don't allow images to overflow their content */
+  max-width: 100%;
+  /* Make images render as blocks */
+  display: block;
+}
+
+
 .game-body {
   margin: 0;
   padding: 0;
@@ -6,9 +39,18 @@
 
 .game-canvas {
   display: block;
-  /* position: absolute;
+}
+
+
+.info-overlay {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh; */
+  background-color: rgba(0,0,0,0.3);
+  color: white;
+  padding: 0 10px;
+}
+.info-overlay p {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
