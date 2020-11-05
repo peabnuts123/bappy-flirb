@@ -5,7 +5,7 @@ public class BoxController : MonoBehaviour
 {
     // Public references
     [NotNull]
-    public SpriteRenderer sprite;
+    public new Collider2D collider;
 
     // Public config
     private float gravity = 0.01F;
@@ -39,10 +39,12 @@ public class BoxController : MonoBehaviour
                     this.speed.y = Mathf.Max(0, this.speed.y) + this.impulse;
                 }
 
-                var something = (Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height))
-                    - this.sprite.bounds.extents);
 
-                if (Mathf.Abs(this.sprite.transform.position.y) > something.y + 0.4F)
+                Vector2 screenWorldSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+
+                // Test if player is colliding the the edge of the screen
+                if (Mathf.Abs(this.collider.transform.position.y) + this.collider.bounds.extents.y > screenWorldSize.y)
                 {
                     this.ResetState();
                 }
@@ -53,7 +55,7 @@ public class BoxController : MonoBehaviour
 
     private void ResetState()
     {
-        this.sprite.transform.position = Vector3.zero;
+        this.collider.transform.position = Vector3.zero;
         this.speed = Vector2.zero;
         this.gameStateManager.ResetState();
     }
@@ -66,7 +68,7 @@ public class BoxController : MonoBehaviour
                 break;
             case GameState.Playing:
                 this.speed.y -= this.gravity;
-                this.sprite.transform.position = this.sprite.transform.position + (Vector3)this.speed;
+                this.collider.transform.position += (Vector3)this.speed;
                 break;
         }
     }
