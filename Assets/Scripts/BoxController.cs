@@ -12,9 +12,11 @@ public class BoxController : MonoBehaviour
     [SerializeField]
     private TMP_Text scoreText;
 
-
-
     // Public config
+    public bool cheatMode = false;
+
+
+    // Private config
     private float gravity = 0.01F;
     private float movementSpeed = 0.05F;
     private float impulse = 0.015F;
@@ -68,7 +70,15 @@ public class BoxController : MonoBehaviour
                     this.speed.y = Mathf.Max(this.impulse * 5, this.speed.y) + this.impulse;
                 }
 
-                this.speed.y -= this.gravity;
+                if (!this.cheatMode)
+                {
+                    this.speed.y -= this.gravity;
+                }
+                else
+                {
+                    this.speed.y -= this.gravity * Mathf.Sign(this.transform.position.y);
+                }
+
                 this.collider.transform.position += (Vector3)this.speed;
                 break;
         }
@@ -76,7 +86,7 @@ public class BoxController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == WorldObstacle.ObstacleTag)
+        if (other.tag == WorldObstacle.ObstacleTag && !this.cheatMode)
         {
             OnLose();
         }
