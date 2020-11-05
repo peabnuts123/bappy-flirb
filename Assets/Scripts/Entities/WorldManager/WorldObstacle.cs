@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class WorldObstacle : MonoBehaviour
 {
+    // Public static config
+    public static readonly string TAG = "Obstacle";
+
     // Public references
     [NotNull]
     [SerializeField]

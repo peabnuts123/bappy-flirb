@@ -41,18 +41,11 @@ public class BoxController : MonoBehaviour
                 // Test if player is colliding the the edge of the screen
                 if (Mathf.Abs(this.collider.transform.position.y) + this.collider.bounds.extents.y > screenWorldSize.y)
                 {
-                    this.ResetState();
+                    OnLose();
                 }
 
                 break;
         }
-    }
-
-    private void ResetState()
-    {
-        this.collider.transform.position = Vector3.zero;
-        this.speed = Vector2.zero.WithX(this.movementSpeed);
-        this.gameStateManager.ResetState();
     }
 
     void FixedUpdate()
@@ -71,6 +64,27 @@ public class BoxController : MonoBehaviour
                 this.collider.transform.position += (Vector3)this.speed;
                 break;
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == WorldObstacle.TAG)
+        {
+            OnLose();
+        }
+    }
+
+    private void OnLose()
+    {
+        ResetState();
+
+    }
+
+    private void ResetState()
+    {
+        this.collider.transform.position = Vector3.zero;
+        this.speed = Vector2.zero.WithX(this.movementSpeed);
+        this.gameStateManager.ResetState();
     }
 
     // Properties
