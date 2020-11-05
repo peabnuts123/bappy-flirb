@@ -1,11 +1,18 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using Zenject;
 
 public class BoxController : MonoBehaviour
 {
     // Public references
     [NotNull]
-    public new Collider2D collider;
+    [SerializeField]
+    private new Collider2D collider;
+    [NotNull]
+    [SerializeField]
+    private TMP_Text scoreText;
+
+
 
     // Public config
     private float gravity = 0.01F;
@@ -18,6 +25,7 @@ public class BoxController : MonoBehaviour
 
     // Private state
     private Vector2 speed = Vector2.zero;
+    private int _score = 0;
 
     void Start()
     {
@@ -68,9 +76,13 @@ public class BoxController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == WorldObstacle.TAG)
+        if (other.tag == WorldObstacle.ObstacleTag)
         {
             OnLose();
+        }
+        else if (other.tag == WorldObstacle.ObstacleTriggerTag)
+        {
+            ScorePoint();
         }
     }
 
@@ -80,11 +92,17 @@ public class BoxController : MonoBehaviour
 
     }
 
+    private void ScorePoint()
+    {
+        this.Score++;
+    }
+
     private void ResetState()
     {
         this.collider.transform.position = Vector3.zero;
         this.speed = Vector2.zero.WithX(this.movementSpeed);
         this.gameStateManager.ResetState();
+        this.Score = 0;
     }
 
     // Properties
@@ -92,5 +110,14 @@ public class BoxController : MonoBehaviour
     {
         get { return this.gameStateManager.CurrentState; }
         set { this.gameStateManager.CurrentState = value; }
+    }
+    public int Score
+    {
+        get { return this._score; }
+        private set
+        {
+            this._score = value;
+            this.scoreText.text = $"{value}";
+        }
     }
 }

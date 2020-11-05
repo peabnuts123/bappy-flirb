@@ -4,7 +4,9 @@ using UnityEngine;
 public class WorldObstacle : MonoBehaviour
 {
     // Public static config
-    public static readonly string TAG = "Obstacle";
+    public static readonly string ObstacleTag = "Obstacle";
+    public static readonly string ObstacleTriggerTag = "ObstacleTrigger";
+
 
     // Public references
     [NotNull]
@@ -13,6 +15,9 @@ public class WorldObstacle : MonoBehaviour
     [NotNull]
     [SerializeField]
     private GameObject bottomObstacle;
+    [NotNull]
+    [SerializeField]
+    private GameObject triggerObstacle;
     public Camera gameCamera;
 
     // Private state
@@ -23,6 +28,7 @@ public class WorldObstacle : MonoBehaviour
     {
         this.topObstacle.transform.position = this.topObstacle.transform.position.WithX(positionX);
         this.bottomObstacle.transform.position = this.bottomObstacle.transform.position.WithX(positionX);
+        this.triggerObstacle.transform.position = this.triggerObstacle.transform.position.WithX(0.25F + positionX);
     }
 
     /// <summary>
@@ -87,15 +93,19 @@ public class WorldObstacle : MonoBehaviour
         // Dimensions of top/bottom shapes
         float topShapeHeight = coordinateCameraTop.y - topShapeBottom;
         float bottomShapeHeight = bottomShapeTop - coordinateCameraBottom.y;
+        float triggerShapeHeight = this.size;
 
         // transform positions of top/bottom shapes
         float topShapePosition = coordinateCameraTop.y - (topShapeHeight / 2F);
         float bottomShapePosition = coordinateCameraBottom.y + (bottomShapeHeight / 2F);
+        float triggerShapePosition = coordinatePosition.y;
 
-        // Set top/bottom obstacle gameobject definitions
+        // Set top/bottom/trigger obstacle gameobject definitions
         this.topObstacle.transform.position = this.topObstacle.transform.position.WithY(topShapePosition);
         this.topObstacle.transform.localScale = this.topObstacle.transform.localScale.WithY(topShapeHeight);
         this.bottomObstacle.transform.position = this.bottomObstacle.transform.position.WithY(bottomShapePosition);
         this.bottomObstacle.transform.localScale = this.bottomObstacle.transform.localScale.WithY(bottomShapeHeight);
+        this.triggerObstacle.transform.position = this.triggerObstacle.transform.position.WithY(triggerShapePosition);
+        this.triggerObstacle.transform.localScale = this.triggerObstacle.transform.localScale.WithY(triggerShapeHeight);
     }
 }
