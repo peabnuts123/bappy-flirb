@@ -9,7 +9,8 @@ public class BoxController : MonoBehaviour
 
     // Public config
     private float gravity = 0.01F;
-    private float impulse = 0.13F;
+    private float movementSpeed = 0.05F;
+    private float impulse = 0.015F;
 
     // Private references
     [Inject]
@@ -21,6 +22,7 @@ public class BoxController : MonoBehaviour
     void Start()
     {
         Input.simulateMouseWithTouches = true;
+        ResetState();
     }
 
     void Update()
@@ -34,14 +36,7 @@ public class BoxController : MonoBehaviour
                 }
                 break;
             case GameState.Playing:
-                if (Input.GetMouseButtonDown(0))
-                {
-                    this.speed.y = Mathf.Max(0, this.speed.y) + this.impulse;
-                }
-
-
                 Vector2 screenWorldSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-
 
                 // Test if player is colliding the the edge of the screen
                 if (Mathf.Abs(this.collider.transform.position.y) + this.collider.bounds.extents.y > screenWorldSize.y)
@@ -56,7 +51,7 @@ public class BoxController : MonoBehaviour
     private void ResetState()
     {
         this.collider.transform.position = Vector3.zero;
-        this.speed = Vector2.zero;
+        this.speed = Vector2.zero.WithX(this.movementSpeed);
         this.gameStateManager.ResetState();
     }
 
@@ -67,6 +62,11 @@ public class BoxController : MonoBehaviour
             case GameState.Init:
                 break;
             case GameState.Playing:
+                if (Input.GetMouseButton(0))
+                {
+                    this.speed.y = Mathf.Max(this.impulse * 5, this.speed.y) + this.impulse;
+                }
+
                 this.speed.y -= this.gravity;
                 this.collider.transform.position += (Vector3)this.speed;
                 break;

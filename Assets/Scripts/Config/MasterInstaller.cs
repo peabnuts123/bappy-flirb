@@ -18,5 +18,6 @@ public class MasterInstaller : MonoInstaller
 
         // Self References
         Container.Bind<Rigidbody2D>().FromComponentSibling();
+        Container.Bind<Camera>().FromComponentSibling();
     }
 }
