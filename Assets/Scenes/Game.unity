@@ -768,6 +768,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1153980339}
+    - target: {fileID: 1011074435, guid: 56a216247913145d5b91ad89bef8269b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1222015080557004, guid: 56a216247913145d5b91ad89bef8269b, type: 3}
       propertyPath: m_Name
       value: _SceneContext
@@ -957,7 +961,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 716638128}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a213c2a5de18049bca0f907b753843a8, type: 3}
   m_Name: 

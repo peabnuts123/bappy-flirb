@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class WorldManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     private Camera gameCamera;
 
+    // Private references
+    [Inject]
+    private GameStateManager gameStateManager;
+
     // Private state
     private List<WorldObstacle> obstacles;
     private float lastObstacleX;
@@ -18,11 +23,24 @@ public class WorldManager : MonoBehaviour
     public void Start()
     {
         this.obstacles = new List<WorldObstacle>();
-        UpdateObstacles();
+        ResetState();
+
+        this.gameStateManager.OnStateChange += this.OnGameStateChange;
     }
 
     public void FixedUpdate()
     {
+        UpdateObstacles();
+    }
+
+    private void ResetState()
+    {
+        this.lastObstacleX = 0;
+        foreach (WorldObstacle obstacle in this.obstacles)
+        {
+            Destroy(obstacle.gameObject);
+        }
+        this.obstacles.Clear();
         UpdateObstacles();
     }
 
@@ -74,5 +92,15 @@ public class WorldManager : MonoBehaviour
     {
         // True if proposed spawn location is less then 1 screen right of the camera
         return proposedX < cameraRight + cameraWidth;
+    }
+
+    private void OnGameStateChange(GameState newState, GameState oldState)
+    {
+        switch (newState)
+        {
+            case GameState.Init:
+                ResetState();
+                break;
+        }
     }
 }

@@ -53,7 +53,6 @@ public class BoxController : MonoBehaviour
                 {
                     OnLose();
                 }
-
                 break;
         }
     }
@@ -99,7 +98,6 @@ public class BoxController : MonoBehaviour
     private void OnLose()
     {
         ResetState();
-
     }
 
     private void ScorePoint()
